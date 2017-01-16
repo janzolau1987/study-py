@@ -53,17 +53,19 @@ Request对象经过调度，执行生成scrapy.http.Response对象并送回给sp
 Selectors选择器简介
 从网页中提取数据有很多方法。Scrapy使用一种基于XPath和CSS表达式机制：Scrapy Selectors。
 这里给出XPath表达式的例子及对应含义:
-> /html/head/title : 选择HTML文档中<head>标签内的<title>元素
-> /html/head/title/text() : 选择上面提到的<title>元素的文字
-> //td : 选择所有的<td>元素
-> //div[@class="mine"] : 选择所有具有class="mine"属性有div元素
+
+    > /html/head/title : 选择HTML文档中<head>标签内的<title>元素
+    > /html/head/title/text() : 选择上面提到的<title>元素的文字
+    > //td : 选择所有的<td>元素
+    > //div[@class="mine"] : 选择所有具有class="mine"属性有div元素
 
 为了配合XPath,Scrapy除了提供了Selector之外，还提供了方法来避免每次从response中提取数据时生成selector的麻烦。
 Selector有四个基本的方法:
-> xpath() : 传入xpath表达式，返回该表达式所对应的所有节点的selector list列表。
-> css() : 传入css表达式，返回该表达式所对应的所有节点的selector list列表
-> extract() : 序列化该节点的unicode字符串并返回list列表
-> re() : 根据传入的正则表达式对数据进行提取，返回unicode字符串list列表
+
+    > xpath() : 传入xpath表达式，返回该表达式所对应的所有节点的selector list列表。
+    > css() : 传入css表达式，返回该表达式所对应的所有节点的selector list列表
+    > extract() : 序列化该节点的unicode字符串并返回list列表
+    > re() : 根据传入的正则表达式对数据进行提取，返回unicode字符串list列表
 
 ###提取数据
 可以通过这段代码选择该页面中网站列表里所有&lt;li&gt;元素:
