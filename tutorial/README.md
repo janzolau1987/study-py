@@ -2,7 +2,7 @@
 ##1.创建一个Scrapy项目
 在开始爬取之前，必须创建一个新的Scrapy项目。进入打算存储代码的目录中，运行下列命令：
 ```shell
-    scrapy startproject tutorial
+scrapy startproject tutorial
 ```
 该命令将会创建下列目录:
 ```shell
