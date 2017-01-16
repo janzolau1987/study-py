@@ -1,0 +1,108 @@
+Scrapy提供两种类型命令。一种必须在Scrapy项目中运行(针对项目(Project-specific)的命令)，另一种则不
+需要(全局命令)。全局命令在项目中运行时的表现可能会与在非项目中运行有些许差别(因为可能会使用项目的设定).
+
+全局命令:
+    . startproject
+        语法: scrapy startproject <project-name>
+        是否需要项目: no
+        在project-name文件夹下创建一个名为project-name的Scrapy项目。
+
+    . settings
+        语法: scrapy settings [options]
+        是否需要项目: no
+        获取Scrapy的设定
+        在项目中运行时，该命令将会输出项目的设定值，否则输出Scrapy默认设定。
+        样例：
+        scrapy settings --get BOT_NAME
+        scrapy settings --get DOWNLOAD_DELAY
+
+
+    . runspider
+        语法: scrapy runspider <spider_file.py>
+        是否需要项目: no
+        在未创建项目的情况下，运行一个编写在Python文件中的spider。
+
+    . shell
+        语法: scrapy shell [url]
+        是否需要项目: no
+        以给定的URL(如果给出)或者空(没有给出URL)启动Scrapy shell。
+
+    . fetch
+        语法: scrapy fetch <url>
+        是否需要项目: no
+        使用Scrapy下载器下载给定的URL，并将获取到的内容送到标准输出。
+        该命令以spider下载页面的方式获取页面。例如，如果spider有 USER_AGENT 属性修改了 User Agent，
+        该命令将会使用该属性。
+
+    . view
+        语法: scrapy view <url>
+        是否需要项目: no
+        在浏览器中打开给定的URL，并以Scrapy spider获取到的形式展现。 有些时候spider获取到的页面和普通
+        用户看到的并不相同。 因此该命令可以用来检查spider所获取到的页面，并确认这是您所期望的。
+
+    . version
+        语法: scrapy version [-v]
+        是否需要项目: no
+        输出Scrapy版本。配合 -v 运行时，该命令同时输出Python, Twisted以及平台的信息，方便bug提交。
+
+项目(Project-only)命令:
+    . crawl
+        语法: scrapy crawl <spider>
+        是否需要项目: yes
+        使用spider进行爬取。
+
+    . check
+        语法: scrapy check [-l] <spider>
+        是否需要项目: yes
+        运行contract检查
+
+    . list
+        语法: scrapy list
+        是否需要项目: yes
+        列出当前项目中所有可用的spider。每行输出一个spider。
+
+    . edit
+        语法: scrapy edit <spider>
+        是否需要项目: yes
+        使用EDITOR中设定的编辑器编辑给定的spider。
+        该命令仅仅是提供一个快捷方式。开发者可以自由选择其他工具或者IDE来编写调试spider。
+
+    . parse
+        语法: scrapy parse <url> [options]
+        是否需要项目: yes
+        获取给定的URL并使用相应的spider分析处理。如果您提供 --callback 选项，则使用spider的该方法处理，
+        否则使用 parse 。
+
+        支持的选项:
+            | --spider=SPIDER: 跳过自动检测spider并强制使用特定的spider
+            | --a NAME=VALUE: 设置spider的参数(可能被重复)
+            | --callback or -c: spider中用于解析返回(response)的回调函数
+            | --pipelines: 在pipeline中处理item
+            | --rules or -r: 使用 CrawlSpider 规则来发现用来解析返回(response)的回调函数
+            | --noitems: 不显示爬取到的item
+            | --nolinks: 不显示提取到的链接
+            | --nocolour: 避免使用pygments对输出着色
+            | --depth or -d: 指定跟进链接请求的层次数(默认: 1)
+            | --verbose or -v: 显示每个请求的详细信息
+
+    . genspider
+        语法: scrapy genspider [-t template] <name> <domain>
+        是否需要项目: yes
+        在当前项目中创建spider.该方法可以使用提前定义好的模板来生成spider。
+        scrapy genspider -l
+        scrapy genspider -d basic
+        scrapy genspider -t basic example example.com
+
+    . deploy
+        语法: scrapy deploy [<target:project> | -l <target> | -L]
+        是否需要项目: yes
+        将项目部署到Scrapyd服务。
+
+    . bench
+        语法: scrapy bench
+        是否需要项目: no
+        运行benchmark测试。
+
+
+
+

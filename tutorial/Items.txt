@@ -1,0 +1,26 @@
+Items
+爬取的主要目标就是从非结构性的数据源提取结构性数据，例如网页。Scrapy提供Item类来满足这样的需求。
+
+Item对象是种简单的窗口，保存了爬取到的数据。其提供了类似于词典(dictionary-like)的API以及用于声明可
+用字段的简单语法。
+
+声明Item
+Item使用简单的class定义语法以及Field对象来声明。例如：
+import scrapy
+
+class Product(scrapy.Item):
+    name = scrapy.Field()
+    price = scrapy.Field()
+    stock = scrapy.Field()
+    last_updated = scrapy.Field(serializer=str)
+
+Item字段(Item Fields)
+Field 对象指明了每个字段的元数据(metadata)。例如下面例子中 last_updated 中指明了该字段的序列化函数。
+您可以为每个字段指明任何类型的元数据。 Field 对象对接受的值没有任何限制。也正是因为这个原因，文档也无法提供所有
+可用的元数据的键(key)参考列表。 Field 对象中保存的每个键可以由多个组件使用，并且只有这些组件知道这个键的存在。
+您可以根据自己的需求，定义使用其他的 Field 键。 设置 Field 对象的主要目的就是在一个地方定义好所有的元数据。
+一般来说，那些依赖某个字段的组件肯定使用了特定的键(key)。您必须查看组件相关的文档，查看其用了哪些元数据键(metadata key)。
+需要注意的是，用来声明item的 Field 对象并没有被赋值为class的属性。 不过您可以通过 Item.fields 属性进行访问。
+
+
+
