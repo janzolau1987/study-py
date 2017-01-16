@@ -1,8 +1,7 @@
-#!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-from tkinter import *
-import tkinter.messagebox as messagebox
+from Tkinter import *
+import tkMessageBox as messagebox
 
 
 class Application(Frame):
