@@ -18,10 +18,12 @@ class YyhSpider(scrapy.Spider):
                 yield scrapy.Request(next_page, callback=self.parse_search)
 
     def parse_search(self, response):
-        for sel in response.xpath('//ul[@id="searchTableBody"]/li'):
-            item = YyhItem()
-            item['goods_id'] = sel.xpath('@id').extract_first()
-            pinfo = sel.xpath('div[@class="p-desc"]/pinfo/p').extract()
-            item['goods_name'] = pinfo[0]
-            item['manufacture'] = pinfo[1]
-            yield item
+        print(response.url)
+        # 暂由于ajax采集不了
+        # for sel in response.xpath('//ul[@id="searchTableBody"]/li'):
+        #     item = YyhItem()
+        #     item['goods_id'] = sel.xpath('@id').extract_first()
+        #     pinfo = sel.xpath('div[@class="p-desc"]/pinfo/p').extract()
+        #     item['goods_name'] = pinfo[0]
+        #     item['manufacture'] = pinfo[1]
+        #     yield item
